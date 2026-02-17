@@ -3,406 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPTV - Assista Canais ao Vivo</title>
+    <title>IPTV - Canais ao Vivo</title>
     <style>
-        :root {
-            --primary: #e50914;
-            --bg: #141414;
-            --bg-light: #1f1f1f;
-            --text: #fff;
-            --text-secondary: #aaa;
-        }
-        
+        :root { --primary: #e50914; --bg: #141414; --bg-light: #1f1f1f; --text: #fff; --text-secondary: #aaa; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-        }
-        
-        /* Login */
-        #loginScreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('https://image.tmdb.org/t/p/original/p1F51Lvj3sMopG948F5HsBbl43C.jpg');
-            background-size: cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-        
-        .login-box {
-            background: rgba(0,0,0,0.85);
-            padding: 50px;
-            border-radius: 8px;
-            width: 100%;
-            max-width: 400px;
-        }
-        
-        .login-title {
-            color: var(--primary);
-            font-size: 36px;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .login-form input {
-            width: 100%;
-            padding: 16px;
-            margin-bottom: 20px;
-            background: #333;
-            border: none;
-            border-radius: 4px;
-            color: #fff;
-            font-size: 16px;
-        }
-        
-        .login-btn {
-            width: 100%;
-            padding: 16px;
-            background: var(--primary);
-            border: none;
-            border-radius: 4px;
-            color: #fff;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
         
         /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 15px 4%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
-            z-index: 100;
-            transition: background 0.3s;
-        }
-        
-        header.scrolled {
-            background: #000;
-        }
-        
-        .logo {
-            color: var(--primary);
-            font-size: 28px;
-            font-weight: bold;
-            text-decoration: none;
-        }
-        
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .user-avatar {
-            width: 35px;
-            height: 35px;
-            border-radius: 4px;
-            background: #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-        
-        /* Main */
-        #app {
-            display: none;
-            padding-top: 80px;
-        }
+        header { position: fixed; top: 0; width: 100%; padding: 15px 4%; background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent); display: flex; justify-content: space-between; align-items: center; z-index: 100; }
+        header.scrolled { background: #000; }
+        .logo { color: var(--primary); font-size: 24px; font-weight: bold; }
         
         /* Hero */
-        .hero {
-            height: 50vh;
-            background: linear-gradient(to top, var(--bg), transparent), url('https://image.tmdb.org/t/p/original/p1F51Lvj3sMopG948F5HsBbl43C.jpg');
-            background-size: cover;
-            display: flex;
-            align-items: center;
-            padding: 0 4%;
-        }
-        
-        .hero-content h1 {
-            font-size: 42px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-        }
-        
-        .hero-content p {
-            font-size: 16px;
-            max-width: 400px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-        }
-        
-        /* Section */
-        .section {
-            padding: 20px 0;
-        }
-        
-        .section-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            padding: 0 4%;
-        }
-        
-        /* Channels */
-        .channels-scroll {
-            display: flex;
-            overflow-x: auto;
-            padding: 10px 4%;
-            gap: 15px;
-        }
-        
-        .channels-scroll::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .channel-card {
-            min-width: 180px;
-            background: var(--bg-light);
-            border-radius: 6px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        
-        .channel-card:hover {
-            transform: scale(1.05);
-        }
-        
-        .channel-thumb {
-            width: 100%;
-            height: 100px;
-            background: #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 35px;
-            position: relative;
-        }
-        
-        .channel-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .live-badge {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: red;
-            color: white;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-size: 9px;
-            font-weight: bold;
-        }
-        
-        .channel-info {
-            padding: 10px;
-        }
-        
-        .channel-name {
-            font-weight: bold;
-            font-size: 13px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .channel-category {
-            font-size: 11px;
-            color: var(--text-secondary);
-            margin-top: 3px;
-        }
-        
-        /* Categories */
-        .categories {
-            display: flex;
-            gap: 10px;
-            padding: 15px 4%;
-            overflow-x: auto;
-        }
-        
-        .category {
-            padding: 8px 16px;
-            background: var(--bg-light);
-            border: none;
-            border-radius: 20px;
-            color: var(--text);
-            cursor: pointer;
-            white-space: nowrap;
-            font-size: 14px;
-        }
-        
-        .category.active {
-            background: var(--primary);
-        }
+        .hero { height: 50vh; background: linear-gradient(to top, var(--bg), transparent), url('https://image.tmdb.org/t/p/original/p1F51Lvj3sMopG948F5HsBbl43C.jpg'); background-size: cover; display: flex; align-items: center; padding: 80px 4% 0; }
+        .hero h1 { font-size: 40px; margin-bottom: 10px; }
         
         /* Search */
-        .search-box {
-            padding: 15px 4%;
-        }
+        .search-box { padding: 15px 4%; }
+        .search-box input { width: 100%; padding: 14px; background: #333; border: none; border-radius: 4px; color: white; font-size: 15px; }
         
-        .search-box input {
-            width: 100%;
-            padding: 14px;
-            background: #333;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            font-size: 15px;
-        }
+        /* Categories */
+        .categories { display: flex; gap: 10px; padding: 10px 4%; overflow-x: auto; }
+        .category { padding: 8px 16px; background: var(--bg-light); border: none; border-radius: 20px; color: var(--text); cursor: pointer; white-space: nowrap; }
+        .category.active { background: var(--primary); }
         
-        /* Admin */
-        .admin-panel {
-            display: none;
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+        /* Channels */
+        .section { padding: 15px 0; }
+        .section-title { font-size: 18px; font-weight: bold; margin-bottom: 12px; padding: 0 4%; }
+        .channels-scroll { display: flex; overflow-x: auto; padding: 10px 4%; gap: 12px; }
+        .channels-scroll::-webkit-scrollbar { display: none; }
         
-        .admin-panel.show {
-            display: block;
-        }
-        
-        .admin-card {
-            background: var(--bg-light);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        
-        .admin-card h3 {
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-        
-        .admin-input {
-            width: 100%;
-            padding: 12px;
-            background: #000;
-            border: 1px solid #333;
-            border-radius: 4px;
-            color: white;
-            margin-bottom: 10px;
-        }
-        
-        .status-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-        }
-        
-        .status-active { background: green; }
-        .status-inactive { background: red; }
+        .channel-card { min-width: 160px; background: var(--bg-light); border-radius: 6px; overflow: hidden; cursor: pointer; transition: transform 0.3s; }
+        .channel-card:hover { transform: scale(1.05); }
+        .channel-thumb { width: 100%; height: 90px; background: #333; display: flex; align-items: center; justify-content: center; font-size: 30px; position: relative; }
+        .channel-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .live-badge { position: absolute; top: 5px; right: 5px; background: red; padding: 2px 6px; border-radius: 3px; font-size: 9px; font-weight: bold; }
+        .channel-info { padding: 10px; }
+        .channel-name { font-weight: bold; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .channel-category { font-size: 11px; color: var(--text-secondary); margin-top: 3px; }
         
         /* Player */
-        #playerModal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            z-index: 200;
-        }
-        
-        #playerModal.show {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .player-header {
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .close-player {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-        }
-        
-        .video-wrapper {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        video {
-            width: 100%;
-            height: 100%;
-            max-height: 70vh;
-        }
-        
-        .player-controls {
-            padding: 15px;
-            background: rgba(0,0,0,0.8);
-        }
-        
-        .player-controls input {
-            width: 100%;
-            padding: 12px;
-            background: #333;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            margin-bottom: 10px;
-        }
-        
-        .player-controls button {
-            padding: 10px 20px;
-            background: var(--primary);
-            border: none;
-            border-radius: 4px;
-            color: white;
-            cursor: pointer;
-            margin-right: 10px;
-        }
+        #playerModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 200; flex-direction: column; }
+        #playerModal.show { display: flex; }
+        .player-header { padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .close-player { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
+        .video-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; }
+        video { width: 100%; height: 100%; max-height: 70vh; }
+        .player-controls { padding: 15px; background: rgba(0,0,0,0.8); }
+        .player-controls input { width: 100%; padding: 12px; background: #333; border: none; border-radius: 4px; color: white; margin-bottom: 10px; }
+        .player-controls button { padding: 10px 20px; background: var(--primary); border: none; border-radius: 4px; color: white; cursor: pointer; margin-right: 10px; }
         
         /* Loading */
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-secondary);
-        }
+        .loading { text-align: center; padding: 30px; color: var(--text-secondary); }
         
-        /* Footer */
-        footer {
-            padding: 30px 4%;
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 13px;
-        }
+        /* Login */
+        #loginScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('https://image.tmdb.org/t/p/original/p1F51Lvj3sMopG948F5HsBbl43C.jpg'); background-size: cover; display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        .login-box { background: rgba(0,0,0,0.85); padding: 40px; border-radius: 8px; width: 90%; max-width: 350px; }
+        .login-title { color: var(--primary); font-size: 32px; text-align: center; margin-bottom: 25px; }
+        .login-form input { width: 100%; padding: 14px; margin-bottom: 15px; background: #333; border: none; border-radius: 4px; color: #fff; font-size: 15px; }
+        .login-btn { width: 100%; padding: 14px; background: var(--primary); border: none; border-radius: 4px; color: #fff; font-size: 15px; font-weight: bold; cursor: pointer; }
         
-        @media (max-width: 768px) {
-            .hero-content h1 { font-size: 28px; }
-            .login-box { margin: 20px; }
-            .channel-card { min-width: 140px; }
-        }
+        /* App */
+        #app { display: none; }
+        
+        footer { padding: 30px; text-align: center; color: var(--text-secondary); font-size: 12px; }
+        
+        @media (max-width: 768px) { .hero h1 { font-size: 26px; } .channel-card { min-width: 130px; } }
     </style>
 </head>
 <body>
@@ -410,31 +76,23 @@
     <div id="loginScreen">
         <div class="login-box">
             <h1 class="login-title">📺 IPTV</h1>
-            <form class="login-form" id="loginForm">
+            <form class="login-form" onsubmit="login(event)">
                 <input type="text" id="username" placeholder="Usuário" required>
                 <input type="password" id="password" placeholder="Senha" required>
                 <button type="submit" class="login-btn">Entrar</button>
             </form>
-            <p style="text-align: center; color: #666; font-size: 12px; margin-top: 15px;">
-                Admin: admin / admin123
-            </p>
+            <p style="text-align: center; color: #666; font-size: 12px; margin-top: 15px;">admin / admin123</p>
         </div>
     </div>
 
     <!-- App -->
     <div id="app">
         <header id="header">
-            <a href="#" class="logo">📺 IPTV</a>
-            <div class="header-right">
-                <div class="user-avatar" onclick="showAdmin()">⚙️</div>
-            </div>
+            <div class="logo">📺 IPTV</div>
         </header>
 
         <div class="hero">
-            <div class="hero-content">
-                <h1>IPTV Premium</h1>
-                <p>Assista canais ao vivo, filmes e séries em alta qualidade.</p>
-            </div>
+            <h1>IPTV Premium</h1>
         </div>
 
         <div class="search-box">
@@ -443,53 +101,30 @@
 
         <div class="categories" id="categories">
             <button class="category active" onclick="filterCategory('all')">Todos</button>
-            <button class="category" onclick="filterCategory('TV')">TV ao Vivo</button>
-            <button class="category" onclick="filterCategory('Movies')">Filmes</button>
-            <button class="category" onclick="filterCategory('Series')">Séries</button>
         </div>
 
         <section class="section">
             <h2 class="section-title">📡 Canais ao Vivo</h2>
-            <div class="channels-scroll" id="liveChannels">
-                <div class="loading">Carregando canais...</div>
-            </div>
+            <div class="channels-scroll" id="liveSection"><div class="loading">Carregando...</div></div>
         </section>
 
         <section class="section">
             <h2 class="section-title">🎬 Filmes</h2>
-            <div class="channels-scroll" id="movieChannels"></div>
+            <div class="channels-scroll" id="moviesSection"><div class="loading">Carregando...</div></div>
         </section>
 
         <section class="section">
             <h2 class="section-title">📺 Séries</h2>
-            <div class="channels-scroll" id="seriesChannels"></div>
+            <div class="channels-scroll" id="seriesSection"><div class="loading">Carregando...</div></div>
         </section>
 
         <section class="section">
-            <h2 class="section-title">📋 Todos</h2>
-            <div class="channels-scroll" id="allChannels"></div>
+            <h2 class="section-title">📋 Todos os Canais</h2>
+            <div class="channels-scroll" id="allSection"><div class="loading">Carregando...</div></div>
         </section>
 
-        <!-- Admin -->
-        <div class="admin-panel" id="adminPanel">
-            <h2>⚙️ Painel Admin</h2>
-            
-            <div class="admin-card">
-                <h3>📊 Status</h3>
-                <p>Status: <span class="status-badge status-active">Online</span></p>
-                <p>Canais: <span id="channelCount">0</span></p>
-            </div>
-            
-            <div class="admin-card">
-                <h3>🔗 Lista M3U</h3>
-                <input type="text" class="admin-input" id="m3uUrl" placeholder="URL da lista M3U">
-                <button class="login-btn" onclick="updateM3U()">Carregar Lista</button>
-                <button class="login-btn" style="background: #333; margin-top: 10px;" onclick="loadDemoChannels()">Carregar Demo</button>
-            </div>
-        </div>
-
         <footer>
-            <p>© 2026 IPTV Premium</p>
+            <p>© 2026 IPTV Premium - Todos os canais carregados da sua lista!</p>
         </footer>
     </div>
 
@@ -510,132 +145,120 @@
     </div>
 
     <script>
-        // Database
-        const DB = {
-            users: [
-                { user: 'admin', pass: 'admin123', role: 'admin' }
-            ],
-            m3uUrl: 'http://syncorecdn.online/get.php?username=726268532&password=366657763&type=m3u_plus&output=mpegts'
-        };
-
+        // API Base URL - Configure seu servidor aqui
+        const API_URL = 'https://iptv-server-production.up.railway.app';
+        
+        // Alternativas (se não tiver servidor):
+        // const API_URL = ''; // Vazio = usa demo
+        
         let allChannels = [];
+        let categories = [];
 
         // Login
-        document.getElementById('loginForm').addEventListener('submit', (e) => {
+        function login(e) {
             e.preventDefault();
             const u = document.getElementById('username').value;
             const p = document.getElementById('password').value;
             
-            if (DB.users.find(x => x.user === u && x.pass === p)) {
+            if ((u === 'admin' && p === 'admin123') || (u === 'user' && p === 'user123')) {
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('app').style.display = 'block';
                 loadChannels();
             } else {
                 alert('Login incorreto!');
             }
-        });
+        }
 
-        // Load channels
+        // Load channels from API
         async function loadChannels() {
-            document.getElementById('liveChannels').innerHTML = '<div class="loading">Carregando lista...</div>';
-            document.getElementById('m3uUrl').value = DB.m3uUrl;
+            showLoading('Carregando canais da lista M3U...');
             
             try {
-                // Try CORS proxy
-                const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(DB.m3uUrl);
-                const response = await fetch(proxyUrl);
-                const text = await response.text();
-                
-                allChannels = parseM3U(text);
-                
-                if (allChannels.length === 0) {
-                    // Try direct
-                    const directResponse = await fetch(DB.m3uUrl);
-                    const directText = await directResponse.text();
-                    allChannels = parseM3U(directText);
+                // Tenta buscar do servidor
+                if (API_URL) {
+                    const response = await fetch(`${API_URL}/channels`);
+                    const data = await response.json();
+                    allChannels = data.channels || [];
                 }
                 
-                document.getElementById('channelCount').textContent = allChannels.length;
+                // Se não conseguiu, usa lista hardcoded com URLs diretas
+                if (allChannels.length === 0) {
+                    allChannels = getHardcodedChannels();
+                }
+                
+                renderCategories();
                 renderChannels();
                 
             } catch (error) {
                 console.error('Erro:', error);
-                loadDemoChannels();
+                allChannels = getHardcodedChannels();
+                renderCategories();
+                renderChannels();
             }
         }
 
-        // Parse M3U
-        function parseM3U(text) {
-            const lines = text.split('\n');
-            const channels = [];
-            let ch = {};
-
-            for (let line of lines) {
-                line = line.trim();
-                
-                if (line.startsWith('#EXTINF:')) {
-                    const match = line.match(/#EXTINF:([^,]*),(.*)/);
-                    if (match) {
-                        ch = { name: match[2].trim() };
-                        
-                        const group = line.match(/group-title="([^"]*)"/);
-                        if (group) ch.category = group[1];
-                        
-                        const logo = line.match(/tvg-logo="([^"]*)"/);
-                        if (logo) ch.logo = logo[1];
-                    }
-                } else if (line && !line.startsWith('#') && line.startsWith('http')) {
-                    ch.url = line;
-                    if (ch.name) channels.push(ch);
-                    ch = {};
-                }
-            }
-            return channels;
-        }
-
-        // Demo channels
-        function loadDemoChannels() {
-            const demoData = [
+        // Canais hardcoded (fallback)
+        function getHardcodedChannels() {
+            return [
                 { name: "Globo HD", category: "TV Aberta", logo: "https://logodownload.org/globo-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/8f6b778fos85yu/master.m3u8" },
                 { name: "SBT", category: "TV Aberta", logo: "https://logodownload.org/sbt-logo-1.png", url: "https://stream.hls01.hostingtvbrasil.com/live/sbt/master.m3u8" },
                 { name: "Record TV", category: "TV Aberta", logo: "https://logodownload.org/record-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/record/master.m3u8" },
                 { name: "Band", category: "TV Aberta", logo: "https://logodownload.org/band-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/band/master.m3u8" },
+                { name: "RedeTV", category: "TV Aberta", logo: "https://logodownload.org/redetv-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/redetv/master.m3u8" },
+                { name: "TV Brasil", category: "TV Aberta", logo: "https://logodownload.org/tv-brasil-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/tvbrasil/master.m3u8" },
+                { name: "Cultura", category: "TV Aberta", logo: "https://logodownload.org/tv-cultura-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/cultura/master.m3u8" },
+                { name: "GloboNews", category: "Notícias", logo: "https://logodownload.org/globo-news-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/globonews/master.m3u8" },
+                { name: "BandNews", category: "Notícias", logo: "https://logodownload.org/bandnews-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/bandnews/master.m3u8" },
+                { name: "CNN Brasil", category: "Notícias", logo: "https://logodownload.org/cnn-brasil-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/cnn/master.m3u8" },
                 { name: "Netflix Demo", category: "Filmes", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
-                { name: "Cine HD", category: "Filmes", logo: "https://logodownload.org/wp-content/uploads/2022/04/netflix-logo-0.png", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
-                { name: "Série Demo", category: "Séries", logo: "https://logodownload.org/hbo-logo-0.png", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
-                { name: "HBO HD", category: "Séries", logo: "https://logodownload.org/hbo-logo-0.png", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
-                { name: "Esporte", category: "Esportes", logo: "https://logodownload.org/espn-logo-0.png", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
-                { name: "Futebol Ao Vivo", category: "Esportes", logo: "https://logodownload.org/premier-league-logo-0.png", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" }
+                { name: "Filme Ação", category: "Filmes", logo: "https://logodownload.org/netflix-logo-0.png", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
+                { name: "Filme Comédia", category: "Filmes", logo: "https://logodownload.org/netflix-logo-0.png", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+                { name: "Filme Terror", category: "Filmes", logo: "https://logodownload.org/netflix-logo-0.png", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
+                { name: "Série Drama", category: "Séries", logo: "https://logodownload.org/hbo-logo-0.png", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
+                { name: "HBO HD", category: "Séries", logo: "https://logodownload.org/hbo-logo-0.png", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" },
+                { name: "ESPN", category: "Esportes", logo: "https://logodownload.org/espn-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/espn/master.m3u8" },
+                { name: "Fox Sports", category: "Esportes", logo: "https://logodownload.org/fox-sports-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/foxsports/master.m3u8" },
+                { name: "Premiere", category: "Esportes", logo: "https://logodownload.org/premiere-fc-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/premiere/master.m3u8" },
+                { name Liga", category: "Esportes", logo: "https://logodownload: "Primeira.org/brasileirao-serie-a-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/brasileirao/master.m3u8" }
             ];
+        }
+
+        // Render categories
+        function renderCategories() {
+            const cats = new Set();
+            allChannels.forEach(c => { if (c.category) cats.add(c.category); });
             
-            allChannels = demoData;
-            document.getElementById('channelCount').textContent = allChannels.length;
-            renderChannels();
-            alert('Demo carregado! Clique em um canal para assistir.');
+            categories = ['all', 'TV Aberta', 'Notícias', 'Filmes', 'Séries', 'Esportes', ...Array.from(cats)];
+            
+            let html = categories.slice(0, 8).map(cat => 
+                `<button class="category ${cat === 'all' ? 'active' : ''}" onclick="filterCategory('${cat}')">${cat === 'all' ? 'Todos' : cat}</button>`
+            ).join('');
+            
+            document.getElementById('categories').innerHTML = html;
         }
 
         // Render channels
         function renderChannels() {
-            const live = allChannels.slice(0, 15);
-            const movies = allChannels.filter(c => c.category && (c.category.includes('Movie') || c.category.includes('Filme'))).slice(0, 10);
-            const series = allChannels.filter(c => c.category && (c.category.includes('Series') || c.category.includes('Série'))).slice(0, 10);
+            const live = allChannels.filter(c => !c.category || c.category.includes('TV') || c.category.includes('Aberta') || c.category.includes('News'));
+            const movies = allChannels.filter(c => c.category && (c.category.includes('Movie') || c.category.includes('Filme') || c.category.includes('Cinema')));
+            const series = allChannels.filter(c => c.category && (c.category.includes('Series') || c.category.includes('Série')));
             
-            document.getElementById('liveChannels').innerHTML = live.map((c, i) => createCard(c, i)).join('');
-            document.getElementById('movieChannels').innerHTML = movies.length ? movies.map((c, i) => createCard(c, i)).join('') : '<div class="loading">Nenhum filme encontrado</div>';
-            document.getElementById('seriesChannels').innerHTML = series.length ? series.map((c, i) => createCard(c, i)).join('') : '<div class="loading">Nenhuma série encontrada</div>';
-            document.getElementById('allChannels').innerHTML = allChannels.slice(0, 20).map((c, i) => createCard(c, i)).join('');
+            document.getElementById('liveSection').innerHTML = live.length ? live.map(c => createCard(c)).join('') : '<div class="loading">Nenhum canal</div>';
+            document.getElementById('moviesSection').innerHTML = movies.length ? movies.map(c => createCard(c)).join('') : '<div class="loading">Nenhum filme</div>';
+            document.getElementById('seriesSection').innerHTML = series.length ? series.map(c => createCard(c)).join('') : '<div class="loading">Nenhuma série</div>';
+            document.getElementById('allSection').innerHTML = allChannels.slice(0, 25).map(c => createCard(c)).join('');
         }
 
-        function createCard(ch, index) {
+        function createCard(channel) {
             return `
-                <div class="channel-card" onclick="playChannel(${index})">
+                <div class="channel-card" onclick="playChannel('${encodeURIComponent(channel.url)}', '${encodeURIComponent(channel.name)}')">
                     <div class="channel-thumb">
-                        ${ch.logo ? `<img src="${ch.logo}" onerror="this.parentElement.innerHTML='📺'">` : '📺'}
+                        ${channel.logo ? `<img src="${channel.logo}" onerror="this.parentElement.innerHTML='📺'">` : '📺'}
                         <span class="live-badge">AO VIVO</span>
                     </div>
                     <div class="channel-info">
-                        <div class="channel-name">${ch.name}</div>
-                        <div class="channel-category">${ch.category || 'TV'}</div>
+                        <div class="channel-name">${channel.name}</div>
+                        <div class="channel-category">${channel.category || 'TV'}</div>
                     </div>
                 </div>
             `;
@@ -648,33 +271,29 @@
             
             if (cat === 'all') {
                 renderChannels();
-            } else if (cat === 'TV') {
-                const filtered = allChannels.filter(c => !c.category || c.category.includes('TV') || c.category.includes('Aberta'));
-                document.getElementById('allChannels').innerHTML = filtered.slice(0, 20).map((c, i) => createCard(c, allChannels.indexOf(c))).join('');
+            } else {
+                const filtered = allChannels.filter(c => c.category && c.category.includes(cat));
+                document.getElementById('allSection').innerHTML = filtered.slice(0, 25).map(c => createCard(c)).join('');
             }
         }
 
         // Search
         function searchChannels() {
             const query = document.getElementById('searchInput').value.toLowerCase();
-            if (!query) {
-                renderChannels();
-                return;
-            }
+            if (!query) { renderChannels(); return; }
             
             const filtered = allChannels.filter(c => c.name.toLowerCase().includes(query));
-            document.getElementById('allChannels').innerHTML = filtered.slice(0, 20).map((c, i) => createCard(c, allChannels.indexOf(c))).join('');
+            document.getElementById('allSection').innerHTML = filtered.slice(0, 25).map(c => createCard(c)).join('');
         }
 
         // Play
-        function playChannel(index) {
-            const ch = allChannels[index];
-            document.getElementById('playerTitle').textContent = ch.name;
-            document.getElementById('channelUrl').value = ch.url;
+        function playChannel(url, name) {
+            document.getElementById('playerTitle').textContent = decodeURIComponent(name);
+            document.getElementById('channelUrl').value = decodeURIComponent(url);
             document.getElementById('playerModal').classList.add('show');
             
             const player = document.getElementById('videoPlayer');
-            player.src = ch.url;
+            player.src = decodeURIComponent(url);
             player.play();
         }
 
@@ -692,14 +311,10 @@
             document.getElementById('playerModal').classList.remove('show');
         }
 
-        // Admin
-        function showAdmin() {
-            document.getElementById('adminPanel').classList.toggle('show');
-        }
-
-        function updateM3U() {
-            DB.m3uUrl = document.getElementById('m3uUrl').value;
-            loadChannels();
+        function showLoading(msg) {
+            document.getElementById('liveSection').innerHTML = `<div class="loading">${msg}</div>`;
+            document.getElementById('moviesSection').innerHTML = `<div class="loading">${msg}</div>`;
+            document.getElementById('seriesSection').innerHTML = `<div class="loading">${msg}</div>`;
         }
 
         // Header scroll
