@@ -15,60 +15,61 @@
         .logo { color: var(--primary); font-size: 24px; font-weight: bold; }
         
         /* Hero */
-        .hero { height: 50vh; background: linear-gradient(to top, var(--bg), transparent), url('https://image.tmdb.org/t/p/original/p1F51Lvj3sMopG948F5HsBbl43C.jpg'); background-size: cover; display: flex; align-items: center; padding: 80px 4% 0; }
-        .hero h1 { font-size: 40px; margin-bottom: 10px; }
+        .hero { height: 45vh; background: linear-gradient(to top, var(--bg), transparent), url('https://image.tmdb.org/t/p/original/p1F51Lvj3sMopG948F5HsBbl43C.jpg'); background-size: cover; display: flex; align-items: center; padding: 80px 4% 0; }
+        .hero h1 { font-size: 36px; margin-bottom: 10px; }
+        .hero p { font-size: 14px; opacity: 0.8; }
         
         /* Search */
-        .search-box { padding: 15px 4%; }
-        .search-box input { width: 100%; padding: 14px; background: #333; border: none; border-radius: 4px; color: white; font-size: 15px; }
+        .search-box { padding: 10px 4%; }
+        .search-box input { width: 100%; padding: 12px; background: #333; border: none; border-radius: 4px; color: white; font-size: 14px; }
         
         /* Categories */
-        .categories { display: flex; gap: 10px; padding: 10px 4%; overflow-x: auto; }
-        .category { padding: 8px 16px; background: var(--bg-light); border: none; border-radius: 20px; color: var(--text); cursor: pointer; white-space: nowrap; }
+        .categories { display: flex; gap: 8px; padding: 10px 4%; overflow-x: auto; }
+        .category { padding: 6px 14px; background: var(--bg-light); border: none; border-radius: 15px; color: var(--text); cursor: pointer; white-space: nowrap; font-size: 13px; }
         .category.active { background: var(--primary); }
         
         /* Channels */
-        .section { padding: 15px 0; }
-        .section-title { font-size: 18px; font-weight: bold; margin-bottom: 12px; padding: 0 4%; }
-        .channels-scroll { display: flex; overflow-x: auto; padding: 10px 4%; gap: 12px; }
+        .section { padding: 12px 0; }
+        .section-title { font-size: 16px; font-weight: bold; margin-bottom: 10px; padding: 0 4%; }
+        .channels-scroll { display: flex; overflow-x: auto; padding: 8px 4%; gap: 10px; }
         .channels-scroll::-webkit-scrollbar { display: none; }
         
-        .channel-card { min-width: 160px; background: var(--bg-light); border-radius: 6px; overflow: hidden; cursor: pointer; transition: transform 0.3s; }
+        .channel-card { min-width: 140px; background: var(--bg-light); border-radius: 5px; overflow: hidden; cursor: pointer; transition: transform 0.3s; }
         .channel-card:hover { transform: scale(1.05); }
-        .channel-thumb { width: 100%; height: 90px; background: #333; display: flex; align-items: center; justify-content: center; font-size: 30px; position: relative; }
+        .channel-thumb { width: 100%; height: 80px; background: #333; display: flex; align-items: center; justify-content: center; font-size: 28px; position: relative; }
         .channel-thumb img { width: 100%; height: 100%; object-fit: cover; }
-        .live-badge { position: absolute; top: 5px; right: 5px; background: red; padding: 2px 6px; border-radius: 3px; font-size: 9px; font-weight: bold; }
-        .channel-info { padding: 10px; }
-        .channel-name { font-weight: bold; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .channel-category { font-size: 11px; color: var(--text-secondary); margin-top: 3px; }
+        .live-badge { position: absolute; top: 4px; right: 4px; background: red; padding: 2px 5px; border-radius: 2px; font-size: 8px; font-weight: bold; }
+        .channel-info { padding: 8px; }
+        .channel-name { font-weight: bold; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .channel-category { font-size: 10px; color: var(--text-secondary); margin-top: 2px; }
         
         /* Player */
         #playerModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 200; flex-direction: column; }
         #playerModal.show { display: flex; }
-        .player-header { padding: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .close-player { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
+        .player-header { padding: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .close-player { background: none; border: none; color: white; font-size: 22px; cursor: pointer; }
         .video-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; }
-        video { width: 100%; height: 100%; max-height: 70vh; }
-        .player-controls { padding: 15px; background: rgba(0,0,0,0.8); }
-        .player-controls input { width: 100%; padding: 12px; background: #333; border: none; border-radius: 4px; color: white; margin-bottom: 10px; }
-        .player-controls button { padding: 10px 20px; background: var(--primary); border: none; border-radius: 4px; color: white; cursor: pointer; margin-right: 10px; }
+        video { width: 100%; height: 100%; max-height: 65vh; }
+        .player-controls { padding: 12px; background: rgba(0,0,0,0.8); }
+        .player-controls input { width: 100%; padding: 10px; background: #333; border: none; border-radius: 4px; color: white; margin-bottom: 8px; }
+        .player-controls button { padding: 8px 16px; background: var(--primary); border: none; border-radius: 4px; color: white; cursor: pointer; margin-right: 8px; }
         
         /* Loading */
-        .loading { text-align: center; padding: 30px; color: var(--text-secondary); }
+        .loading { text-align: center; padding: 25px; color: var(--text-secondary); font-size: 14px; }
         
         /* Login */
         #loginScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('https://image.tmdb.org/t/p/original/p1F51Lvj3sMopG948F5HsBbl43C.jpg'); background-size: cover; display: flex; align-items: center; justify-content: center; z-index: 1000; }
-        .login-box { background: rgba(0,0,0,0.85); padding: 40px; border-radius: 8px; width: 90%; max-width: 350px; }
-        .login-title { color: var(--primary); font-size: 32px; text-align: center; margin-bottom: 25px; }
-        .login-form input { width: 100%; padding: 14px; margin-bottom: 15px; background: #333; border: none; border-radius: 4px; color: #fff; font-size: 15px; }
-        .login-btn { width: 100%; padding: 14px; background: var(--primary); border: none; border-radius: 4px; color: #fff; font-size: 15px; font-weight: bold; cursor: pointer; }
+        .login-box { background: rgba(0,0,0,0.85); padding: 35px; border-radius: 8px; width: 90%; max-width: 320px; }
+        .login-title { color: var(--primary); font-size: 28px; text-align: center; margin-bottom: 20px; }
+        .login-form input { width: 100%; padding: 12px; margin-bottom: 12px; background: #333; border: none; border-radius: 4px; color: #fff; font-size: 14px; }
+        .login-btn { width: 100%; padding: 12px; background: var(--primary); border: none; border-radius: 4px; color: #fff; font-size: 14px; font-weight: bold; cursor: pointer; }
         
         /* App */
         #app { display: none; }
         
-        footer { padding: 30px; text-align: center; color: var(--text-secondary); font-size: 12px; }
+        footer { padding: 25px; text-align: center; color: var(--text-secondary); font-size: 11px; }
         
-        @media (max-width: 768px) { .hero h1 { font-size: 26px; } .channel-card { min-width: 130px; } }
+        @media (max-width: 768px) { .hero h1 { font-size: 24px; } .channel-card { min-width: 110px; } }
     </style>
 </head>
 <body>
@@ -81,7 +82,7 @@
                 <input type="password" id="password" placeholder="Senha" required>
                 <button type="submit" class="login-btn">Entrar</button>
             </form>
-            <p style="text-align: center; color: #666; font-size: 12px; margin-top: 15px;">admin / admin123</p>
+            <p style="text-align: center; color: #666; font-size: 11px; margin-top: 12px;">admin / admin123</p>
         </div>
     </div>
 
@@ -92,7 +93,10 @@
         </header>
 
         <div class="hero">
-            <h1>IPTV Premium</h1>
+            <div>
+                <h1>IPTV Premium</h1>
+                <p>Canais ao vivo, filmes e séries</p>
+            </div>
         </div>
 
         <div class="search-box">
@@ -104,7 +108,7 @@
         </div>
 
         <section class="section">
-            <h2 class="section-title">📡 Canais ao Vivo</h2>
+            <h2 class="section-title">📡 TV ao Vivo</h2>
             <div class="channels-scroll" id="liveSection"><div class="loading">Carregando...</div></div>
         </section>
 
@@ -119,12 +123,12 @@
         </section>
 
         <section class="section">
-            <h2 class="section-title">📋 Todos os Canais</h2>
+            <h2 class="section-title">📋 Todos</h2>
             <div class="channels-scroll" id="allSection"><div class="loading">Carregando...</div></div>
         </section>
 
         <footer>
-            <p>© 2026 IPTV Premium - Todos os canais carregados da sua lista!</p>
+            <p>© 2026 IPTV Premium</p>
         </footer>
     </div>
 
@@ -145,14 +149,10 @@
     </div>
 
     <script>
-        // API Base URL - Configure seu servidor aqui
-        const API_URL = 'https://iptv-server-production.up.railway.app';
-        
-        // Alternativas (se não tiver servidor):
-        // const API_URL = ''; // Vazio = usa demo
+        // Sua lista M3U
+        const M3U_URL = "http://syncorecdn.online/get.php?username=726268532&password=366657763&type=m3u_plus&output=mpegts";
         
         let allChannels = [];
-        let categories = [];
 
         // Login
         function login(e) {
@@ -169,102 +169,144 @@
             }
         }
 
-        // Load channels from API
+        // Load channels - tenta múltiplos métodos
         async function loadChannels() {
-            showLoading('Carregando canais da lista M3U...');
+            showLoading('Conectando ao servidor...');
             
+            // Method 1: Try direct
+            let success = await tryLoadM3U(M3U_URL);
+            
+            // Method 2: Try corsproxy.io
+            if (!success) {
+                success = await tryLoadM3U('https://corsproxy.io/?' + encodeURIComponent(M3U_URL));
+            }
+            
+            // Method 3: Try allorigins
+            if (!success) {
+                success = await tryLoadM3U('https://api.allorigins.win/raw?url=' + encodeURIComponent(M3U_URL));
+            }
+            
+            // Method 4: Try heroku-cors
+            if (!success) {
+                success = await tryLoadM3U('https://cors-anywhere.herokuapp.com/' + M3U_URL);
+            }
+            
+            // Fallback: canais demo
+            if (!success || allChannels.length === 0) {
+                allChannels = getDemoChannels();
+            }
+            
+            renderCategories();
+            renderChannels();
+        }
+
+        async function tryLoadM3U(url) {
             try {
-                // Tenta buscar do servidor
-                if (API_URL) {
-                    const response = await fetch(`${API_URL}/channels`);
-                    const data = await response.json();
-                    allChannels = data.channels || [];
+                console.log('Trying:', url);
+                const response = await fetch(url, { 
+                    method: 'GET',
+                    headers: { 'User-Agent': 'Mozilla/5.0' }
+                });
+                
+                if (!response.ok) return false;
+                
+                const text = await response.text();
+                if (text.includes('#EXTM3U') || text.includes('#EXTINF:')) {
+                    allChannels = parseM3U(text);
+                    console.log('Loaded channels:', allChannels.length);
+                    return true;
                 }
-                
-                // Se não conseguiu, usa lista hardcoded com URLs diretas
-                if (allChannels.length === 0) {
-                    allChannels = getHardcodedChannels();
-                }
-                
-                renderCategories();
-                renderChannels();
-                
-            } catch (error) {
-                console.error('Erro:', error);
-                allChannels = getHardcodedChannels();
-                renderCategories();
-                renderChannels();
+                return false;
+            } catch (e) {
+                console.log('Failed:', e.message);
+                return false;
             }
         }
 
-        // Canais hardcoded (fallback)
-        function getHardcodedChannels() {
+        function parseM3U(text) {
+            const lines = text.split('\n');
+            const channels = [];
+            let ch = {};
+
+            for (let line of lines) {
+                line = line.trim();
+                
+                if (line.startsWith('#EXTINF:')) {
+                    const parts = line.substring(8).split(',');
+                    if (parts.length >= 2) {
+                        ch = { name: parts[1].trim() };
+                        
+                        const group = line.match(/group-title="([^"]*)"/);
+                        if (group) ch.category = group[1];
+                        
+                        const logo = line.match(/tvg-logo="([^"]*)"/);
+                        if (logo) ch.logo = logo[1];
+                    }
+                } else if (line && line.startsWith('http')) {
+                    ch.url = line;
+                    if (ch.name) channels.push(ch);
+                    ch = {};
+                }
+            }
+            return channels;
+        }
+
+        function getDemoChannels() {
             return [
                 { name: "Globo HD", category: "TV Aberta", logo: "https://logodownload.org/globo-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/8f6b778fos85yu/master.m3u8" },
                 { name: "SBT", category: "TV Aberta", logo: "https://logodownload.org/sbt-logo-1.png", url: "https://stream.hls01.hostingtvbrasil.com/live/sbt/master.m3u8" },
                 { name: "Record TV", category: "TV Aberta", logo: "https://logodownload.org/record-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/record/master.m3u8" },
                 { name: "Band", category: "TV Aberta", logo: "https://logodownload.org/band-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/band/master.m3u8" },
                 { name: "RedeTV", category: "TV Aberta", logo: "https://logodownload.org/redetv-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/redetv/master.m3u8" },
-                { name: "TV Brasil", category: "TV Aberta", logo: "https://logodownload.org/tv-brasil-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/tvbrasil/master.m3u8" },
-                { name: "Cultura", category: "TV Aberta", logo: "https://logodownload.org/tv-cultura-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/cultura/master.m3u8" },
                 { name: "GloboNews", category: "Notícias", logo: "https://logodownload.org/globo-news-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/globonews/master.m3u8" },
-                { name: "BandNews", category: "Notícias", logo: "https://logodownload.org/bandnews-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/bandnews/master.m3u8" },
-                { name: "CNN Brasil", category: "Notícias", logo: "https://logodownload.org/cnn-brasil-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/cnn/master.m3u8" },
+                { name: "ESPN", category: "Esportes", logo: "https://logodownload.org/espn-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/espn/master.m3u8" },
+                { name: "Premiere", category: "Esportes", logo: "https://logodownload.org/premiere-fc-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/premiere/master.m3u8" },
                 { name: "Netflix Demo", category: "Filmes", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
                 { name: "Filme Ação", category: "Filmes", logo: "https://logodownload.org/netflix-logo-0.png", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
-                { name: "Filme Comédia", category: "Filmes", logo: "https://logodownload.org/netflix-logo-0.png", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
-                { name: "Filme Terror", category: "Filmes", logo: "https://logodownload.org/netflix-logo-0.png", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
-                { name: "Série Drama", category: "Séries", logo: "https://logodownload.org/hbo-logo-0.png", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
-                { name: "HBO HD", category: "Séries", logo: "https://logodownload.org/hbo-logo-0.png", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" },
-                { name: "ESPN", category: "Esportes", logo: "https://logodownload.org/espn-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/espn/master.m3u8" },
-                { name: "Fox Sports", category: "Esportes", logo: "https://logodownload.org/fox-sports-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/foxsports/master.m3u8" },
-                { name: "Premiere", category: "Esportes", logo: "https://logodownload.org/premiere-fc-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/premiere/master.m3u8" },
-                { name Liga", category: "Esportes", logo: "https://logodownload: "Primeira.org/brasileirao-serie-a-logo-0.png", url: "https://stream.hls01.hostingtvbrasil.com/live/brasileirao/master.m3u8" }
+                { name: "HBO Demo", category: "Séries", logo: "https://logodownload.org/hbo-logo-0.png", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+                { name: "Série Drama", category: "Séries", logo: "https://logodownload.org/hbo-logo-0.png", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" }
             ];
         }
 
-        // Render categories
         function renderCategories() {
             const cats = new Set();
             allChannels.forEach(c => { if (c.category) cats.add(c.category); });
             
-            categories = ['all', 'TV Aberta', 'Notícias', 'Filmes', 'Séries', 'Esportes', ...Array.from(cats)];
-            
-            let html = categories.slice(0, 8).map(cat => 
-                `<button class="category ${cat === 'all' ? 'active' : ''}" onclick="filterCategory('${cat}')">${cat === 'all' ? 'Todos' : cat}</button>`
-            ).join('');
+            let html = '<button class="category active" onclick="filterCategory(\'all\')">Todos</button>';
+            html += '<button class="category" onclick="filterCategory(\'TV\')">TV</button>';
+            html += '<button class="category" onclick="filterCategory(\'Filme\')">Filmes</button>';
+            html += '<button class="category" onclick="filterCategory(\'Série\')">Séries</button>';
+            html += '<button class="category" onclick="filterCategory(\'Esporte\')">Esportes</button>';
             
             document.getElementById('categories').innerHTML = html;
         }
 
-        // Render channels
         function renderChannels() {
             const live = allChannels.filter(c => !c.category || c.category.includes('TV') || c.category.includes('Aberta') || c.category.includes('News'));
-            const movies = allChannels.filter(c => c.category && (c.category.includes('Movie') || c.category.includes('Filme') || c.category.includes('Cinema')));
-            const series = allChannels.filter(c => c.category && (c.category.includes('Series') || c.category.includes('Série')));
+            const movies = allChannels.filter(c => c.category && (c.category.includes('Filme') || c.category.includes('Movie')));
+            const series = allChannels.filter(c => c.category && (c.category.includes('Série') || c.category.includes('Series')));
             
             document.getElementById('liveSection').innerHTML = live.length ? live.map(c => createCard(c)).join('') : '<div class="loading">Nenhum canal</div>';
             document.getElementById('moviesSection').innerHTML = movies.length ? movies.map(c => createCard(c)).join('') : '<div class="loading">Nenhum filme</div>';
             document.getElementById('seriesSection').innerHTML = series.length ? series.map(c => createCard(c)).join('') : '<div class="loading">Nenhuma série</div>';
-            document.getElementById('allSection').innerHTML = allChannels.slice(0, 25).map(c => createCard(c)).join('');
+            document.getElementById('allSection').innerHTML = allChannels.slice(0, 30).map(c => createCard(c)).join('');
         }
 
-        function createCard(channel) {
+        function createCard(ch) {
             return `
-                <div class="channel-card" onclick="playChannel('${encodeURIComponent(channel.url)}', '${encodeURIComponent(channel.name)}')">
+                <div class="channel-card" onclick="playChannel('${encodeURIComponent(ch.url)}', '${encodeURIComponent(ch.name)}')">
                     <div class="channel-thumb">
-                        ${channel.logo ? `<img src="${channel.logo}" onerror="this.parentElement.innerHTML='📺'">` : '📺'}
+                        ${ch.logo ? `<img src="${ch.logo}" onerror="this.parentElement.innerHTML='📺'">` : '📺'}
                         <span class="live-badge">AO VIVO</span>
                     </div>
                     <div class="channel-info">
-                        <div class="channel-name">${channel.name}</div>
-                        <div class="channel-category">${channel.category || 'TV'}</div>
+                        <div class="channel-name">${ch.name}</div>
+                        <div class="channel-category">${ch.category || 'TV'}</div>
                     </div>
                 </div>
             `;
         }
 
-        // Filter
         function filterCategory(cat) {
             document.querySelectorAll('.category').forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
@@ -273,20 +315,18 @@
                 renderChannels();
             } else {
                 const filtered = allChannels.filter(c => c.category && c.category.includes(cat));
-                document.getElementById('allSection').innerHTML = filtered.slice(0, 25).map(c => createCard(c)).join('');
+                document.getElementById('allSection').innerHTML = filtered.slice(0, 30).map(c => createCard(c)).join('');
             }
         }
 
-        // Search
         function searchChannels() {
             const query = document.getElementById('searchInput').value.toLowerCase();
             if (!query) { renderChannels(); return; }
             
             const filtered = allChannels.filter(c => c.name.toLowerCase().includes(query));
-            document.getElementById('allSection').innerHTML = filtered.slice(0, 25).map(c => createCard(c)).join('');
+            document.getElementById('allSection').innerHTML = filtered.slice(0, 30).map(c => createCard(c)).join('');
         }
 
-        // Play
         function playChannel(url, name) {
             document.getElementById('playerTitle').textContent = decodeURIComponent(name);
             document.getElementById('channelUrl').value = decodeURIComponent(url);
@@ -317,7 +357,6 @@
             document.getElementById('seriesSection').innerHTML = `<div class="loading">${msg}</div>`;
         }
 
-        // Header scroll
         window.addEventListener('scroll', () => {
             document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
         });
